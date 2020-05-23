@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>add employee</title>
+
+
+</head>
+<body>
+<h1>DEPARTMENT:</h1>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+
+</form>
+
+<span><a href="/calendar/list">главная страница</a></span>
+
+
+<form th:action="@{/addEmployee/add}" accept-charset="utf-8">
+    <input type="text" name="idEmployee" placeholder="введите id сотрудника">
+    <input type="text" name="idDep" placeholder="введите id департамента">
+    <button type="submit">добавить в департамент</button>
+</form>
+
+<table class="department">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>департамент</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.id}">id</td>
+        <td th:text="${department.nameDepartment}">name</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<table class="employee">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>last name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}">id</td>
+        <td th:text="${employee.name}">name</td>
+        <td th:text="${employee.lastName}">name</td>
+    </tr>
+    </tbody>
+</table>
+
+<span><a href="/user">user list</a></span>
+</body>
+</html>

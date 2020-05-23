@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Record Calendar</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        .floated {
+            float:left;
+            margin-right:130px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<body>
+
+<form id="create-form" th:action="@{/calendar/saveEdit}"  th:object="${calendar}"  th:method="post" accept-charset="utf-8">
+    <h1>запись:</h1>
+
+    <div class="row">
+        <label for="holder-input">id:</label>
+        <input id="holder-input" name="id" type="text"  th:value="${calendar.id}" value="id"/>
+    </div>
+    <div class="row">
+        <label for="holder-input">id сотрудника:</label>
+        <input  name="ide" type="text"  th:value="${calendar.idEmployee}" value="id"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">дата:</label>
+        <input  name="data" type="text"  th:value="${calendar.utilCalendar.getTime()}" value="дата"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">отметка:</label>
+        <input  name="mark" type="text"  th:value="${calendar.markCalendar.getTypeMark()}" value="отметка"/>
+    </div>
+
+    <div class="floated">
+        <button type="submit">сохранить</button>
+    </div>
+</form>
+
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all Employee</title>
+
+
+</head>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<body>
+<h1>EMPLOYEE:</h1>
+
+
+<form th:action="@{/employee/create}" accept-charset="utf-8" style="float: left;">
+    <button type="submit">добавить сотрудника</button>
+</form>
+<form th:action="@{/employee/edit}" accept-charset="utf-8" style="float: left;">
+    <input type="text" name="id" placeholder="введите id сотрудника">
+    <button type="submit">изменить</button>
+</form>
+<form th:action="@{/employee/delete}" accept-charset="utf-8" >
+    <input type="text" name="id" placeholder="введите id сотрудника">
+    <button type="submit">удалить</button>
+</form>
+
+<table class="employee">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>имя</th>
+        <th>фамилия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="empl : ${employees}">
+        <td th:text="${empl.id}">id</td>
+        <td th:text="${empl.name}">имя</td>
+        <td th:text="${empl.lastName}">фамилия</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<span><a href="/user" >user list</a></span>
+</body>
+</html>

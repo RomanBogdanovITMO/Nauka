@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+
+<form th:action="@{/user}" th:object="${user}" th:method="post" accept-charset="utf-8">
+    <h1>Edit department:</h1>
+
+    <input type="text"  name="username" th:value="${user.username}" value="name"/>
+    <input type="text"  name="userId" th:value="${user.id}" value="id"/>
+    <tr th:each="role : ${roles}">
+        <div>
+            <label><input type="checkbox" name="role" th:value="${role}"><td th:text="${role}"/></label>
+        </div>
+    </tr>
+
+    <button type="submit">Save</button>
+</form>
+<a href="/calendar/list">главная страница</a>
+
+
+</html>

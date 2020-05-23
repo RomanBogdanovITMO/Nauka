@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Record Calendar</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        .floated {
+            float:left;
+            margin-right:130px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<body>
+
+<form id="create-form" th:action="@{/calendar/save}"  th:method="post" accept-charset="utf-8">
+    <h1>Новая запись:</h1>
+
+    <div class="row">
+        <label for="holder-input">id сотрудника:</label>
+        <input id="holder-input" type="text" name="id" placeholder="id сотрудника"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">дата:</label>
+        <input type="text" name="data" placeholder="дата"/>
+    </div>
+
+    <div class="row">
+        <label for="holder-input">отметка:</label>
+        <input type="text" name="mark" placeholder="отметка"/>
+    </div>
+
+    <div class="floated">
+        <button type="submit">сохранить</button>
+    </div>
+</form>
+
+<table class="employee" style="float: left;">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>имя</th>
+        <th>фамилия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}">id</td>
+        <td th:text="${employee.name}">имя</td>
+        <td th:text="${employee.lastName}">фамилия</td>
+
+    </tr>
+    </tbody>
+
+</table>
+
+<table class="mark">
+    <thead>
+    <tr>
+        <th>отметка для календаря</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="mark : ${marks}">
+        <td th:text="${mark}">отметка</td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+</body>
+</html>

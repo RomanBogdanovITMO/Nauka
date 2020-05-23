@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Регистрация </title>
+</head>
+
+<body>
+<script>
+    var disableForm = true;
+    window.addEventListener("load", function(){
+    if(disableForm){
+    var inputs = document.querySelectorAll("form fieldset input, form fieldset textarea");
+    for(var i = 0; i < inputs.length; i++)
+    inputs[i].disabled = true;
+    }
+    });
+</script>
+Add new USER
+
+<h2 th:text="${message}"></h2>
+
+<form th:action="@{/registration}" method="post">
+    <div>
+        <label> User Name :
+            <input type="text" name="username"/>
+        </label>
+    </div>
+    <div>
+        <label> Password:
+            <input type="password" name="password"/>
+        </label>
+    </div>
+    <div>
+        <input type="submit" value="Sign In"/>
+    </div>
+</form>
+</body>
+</html>

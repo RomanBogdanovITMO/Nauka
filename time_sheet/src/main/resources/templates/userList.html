@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List of all Users</title>
+
+
+</head>
+<body>
+<h1>USERS:</h1>
+
+<table class="users">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">name</td>
+        <td th:text="${user.roles}">role</td>
+        <td>
+            <form th:action="@{/user/{id}(id=${user.id})}" th:method="get" accept-charset="utf-8">
+                <button type="submit">edit</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

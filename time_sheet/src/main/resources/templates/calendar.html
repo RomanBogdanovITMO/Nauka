@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>List calendar</title>
+
+    <style type="text/css">
+        body {
+            padding: 10px;
+            margin-left: 100px;
+        }
+
+        .employee, .employee td, .department, .department td, .calendars, .calendars td {
+            border: 1px solid lightgray;
+            padding: 5px;
+
+        }
+        .floated {
+
+            width:150px;
+            display:inline-block;
+            height: 30px;
+        }
+
+        #zatemnenie {
+        background: rgba(102, 102, 102, 0.5);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+      }
+      #okno {
+        width: 300px;
+        height: 60px;
+        text-align: center;
+        padding: 15px;
+        border: 3px solid #0000cc;
+        border-radius: 10px;
+        color: #0000cc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        background: #fff;
+      }
+      #zatemnenie:target {display: block;}
+      .close {
+        display: inline-block;
+        border: 1px solid #0000cc;
+        color: #0000cc;
+        padding: 0 12px;
+        margin: 10px;
+        text-decoration: none;
+        background: #f2f2f2;
+        font-size: 14pt;
+        cursor:pointer;
+      }
+      .close:hover {background: #e6e6ff;}
+
+
+    </style>
+</head>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<body>
+<h1>CALENDAR:</h1>
+
+
+<form th:action="@{/calendar/record}" accept-charset="utf-8" style="float: left;">
+    <button type="submit">добавить запись</button>
+</form>
+<form th:action="@{/calendar/edit}" accept-charset="utf-8" >
+    <input type="text" name="id" placeholder="введите id записи">
+    <button type="submit">изменить запись</button>
+</form>
+<form accept-charset="utf-8" >
+    <a href="/calendar/january">январь</a>
+    <a href="/calendar/february">февраль</a>
+    <a href="/calendar/list">весь список</a>
+</form>
+
+<table class="calendars">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>id сотрудника</th>
+        <th>дата</th>
+        <th>отметка</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="calendar : ${calendars}">
+        <td th:text="${calendar.id}">id</td>
+        <td th:text="${calendar.idEmployee}">id сотрудника</td>
+        <td th:text="${calendar.utilCalendar.getTime()}">дата</td>
+        <td th:text="${calendar.markCalendar.getTypeMark()}">отметка</td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>DEPARTMENT:</h1>
+
+<form th:action="@{/depart/create}" accept-charset="utf-8" style="float: left;">
+    <button type="submit">добавить департамент</button>
+</form>
+<form th:action="@{/edit}" accept-charset="utf-8" style="float: left;">
+    <input type="text" name="id" placeholder="введите id департамента" >
+    <button type="submit">изменить</button>
+</form>
+<form th:action="@{/addEmployee}" accept-charset="utf-8">
+    <button type="submit">добавить сотрудника в деп.</button>
+</form>
+
+<table class="department">
+    <thead>
+    <tr>
+        <th>id</th>
+        <th>департамент</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="department : ${departments}">
+        <td th:text="${department.id}">id</td>
+        <td th:text="${department.nameDepartment}">name</td>
+        <td>
+            <form th:action="@{/listEmp}" accept-charset="utf-8">
+                <input type="text"  name="id" th:value="${department.id}" />
+                <button type="submit">просмотр сотрудников</button>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+</table>
+
+
+<table class="employee">
+    <thead>
+    <tr>
+        <th>name employees</th>
+        <th>last name</th>
+        <th>department</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.name}">name</td>
+        <td th:text="${employee.lastName}">name</td>
+        <td th:text="${employee.department.nameDepartment}">name</td>
+
+    </tr>
+    </tbody>
+</table>
+
+<form th:action="@{/employee/list}" accept-charset="utf-8">
+    <button type="submit">справочник сотрудников</button>
+</form>
+
+
+<span><a href="/user" >user list</a></span>
+</body>
+</html>
